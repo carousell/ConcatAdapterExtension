@@ -9,7 +9,7 @@ interface ItemDecorationOwner {
     fun getItemDecoration(): RecyclerView.ItemDecoration
 }
 
-class ConcatSpaceItemDecoration(private val mergeAdapter: ConcatAdapter) :
+class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
     RecyclerView.ItemDecoration() {
 
     private val list: List<RecyclerView.Adapter<*>>

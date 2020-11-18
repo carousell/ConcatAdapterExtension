@@ -5,7 +5,7 @@ import android.util.DisplayMetrics
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
-import com.carousell.concatadapterextension.ConcatSpaceItemDecoration
+import com.carousell.concatadapterextension.ConcatItemDecoration
 import com.carousell.concatadapterextension.ConcatSpanSizeLookup
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -23,11 +23,6 @@ class MainActivity : AppCompatActivity() {
             BaseAdapter(
                 4,
                 SimpleSpanSizeLookup(1),
-                SimpleItemDecoration(8.toPixel())
-            ),
-            BaseAdapter(
-                4,
-                SimpleSpanSizeLookup(1),
                 SimpleItemDecoration(16.toPixel())
             ),
             BaseAdapter(
@@ -41,12 +36,20 @@ class MainActivity : AppCompatActivity() {
                 SimpleItemDecoration(8.toPixel())
             )
         )
+        val layoutManager = GridLayoutManager(this, spanCount, GridLayoutManager.VERTICAL, false)
+        layoutManager.spanSizeLookup = ConcatSpanSizeLookup(adapter, spanCount)
+        recyclerView.layoutManager = layoutManager
 
-        recyclerView.layoutManager =
-            GridLayoutManager(this, spanCount, GridLayoutManager.VERTICAL, false).also {
-                it.spanSizeLookup = ConcatSpanSizeLookup(adapter, spanCount)
-            }
-        recyclerView.addItemDecoration(ConcatSpaceItemDecoration(adapter))
+        recyclerView.addItemDecoration(ConcatItemDecoration(adapter))
         recyclerView.adapter = adapter
+
+        adapter.addAdapter(
+            0,
+            BaseAdapter(
+                4,
+                SimpleSpanSizeLookup(1),
+                SimpleItemDecoration(8.toPixel())
+            )
+        )
     }
 }
