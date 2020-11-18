@@ -36,5 +36,5 @@ class BaseAdapter(
 
     override fun getSpanSizeLookup() = spanSizeLookup
 
-    override fun getItemDecoration() = itemDecoration
+    override fun getItemDecorations() = listOf(itemDecoration)
 }

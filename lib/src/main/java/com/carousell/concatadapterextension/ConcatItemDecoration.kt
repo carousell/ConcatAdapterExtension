@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 interface ItemDecorationOwner {
-    fun getItemDecoration(): RecyclerView.ItemDecoration
+    fun getItemDecorations(): List<RecyclerView.ItemDecoration>
 }
 
 class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
@@ -25,7 +25,9 @@ class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
         list.forEach { adapter ->
             if (index < adapter.itemCount) {
                 if (adapter is ItemDecorationOwner) {
-                    adapter.getItemDecoration().getItemOffsets(outRect, view, parent, state)
+                    adapter.getItemDecorations().forEach {
+                        it.getItemOffsets(outRect, view, parent, state)
+                    }
                     return
                 } else {
                     outRect.set(0, 0, 0, 0)
