@@ -34,8 +34,8 @@ android {
 }
 
 dependencies {
-//    implementation project(":lib")
-    implementation 'com.github.carousell:ConcatAdapterExtension:-SNAPSHOT'
+    implementation project(":lib")
+//    implementation 'com.github.carousell:ConcatAdapterExtension:-SNAPSHOT'
 
     implementation "androidx.recyclerview:recyclerview:1.2.0-alpha06"
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
