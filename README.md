@@ -1,2 +1,2 @@
 # -ConcatAdapterExtension
-Extension for  ConcatAdapter
+Extension for ConcatAdapter
