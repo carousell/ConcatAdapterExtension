@@ -25,9 +25,7 @@ class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
         list.forEach { adapter ->
             if (index < adapter.itemCount) {
                 if (adapter is ItemDecorationOwner) {
-                    adapter.getItemDecorations().forEach {
-                        it.getItemOffsets(outRect, view, parent, state)
-                    }
+                    applyOffset(adapter.getItemDecorations(), outRect, view, parent, state)
                     return
                 } else {
                     outRect.set(0, 0, 0, 0)
@@ -38,5 +36,26 @@ class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
             }
         }
         outRect.set(0, 0, 0, 0)
+    }
+
+    private fun applyOffset(
+        list: List<RecyclerView.ItemDecoration>,
+        outRect: Rect,
+        view: View,
+        parent: RecyclerView,
+        state: RecyclerView.State
+    ) {
+        if (list.size == 1) {//fast path
+            list[0].getItemOffsets(outRect, view, parent, state)
+        } else {
+            val innerRect = Rect()
+            list.forEach {
+                it.getItemOffsets(innerRect, view, parent, state)
+                outRect.top += innerRect.top
+                outRect.bottom += innerRect.bottom
+                outRect.left += innerRect.left
+                outRect.right += innerRect.right
+            }
+        }
     }
 }
