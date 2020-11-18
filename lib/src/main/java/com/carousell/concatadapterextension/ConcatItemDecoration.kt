@@ -48,8 +48,8 @@ class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
         if (list.size == 1) {//fast path
             list[0].getItemOffsets(outRect, view, parent, state)
         } else {
-            val innerRect = Rect()
             list.forEach {
+                val innerRect = Rect()
                 it.getItemOffsets(innerRect, view, parent, state)
                 outRect.top += innerRect.top
                 outRect.bottom += innerRect.bottom
