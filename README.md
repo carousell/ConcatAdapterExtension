@@ -44,3 +44,22 @@ And then generate `ConcatItemDecoration` by your `ConcatAdapter`.
 val adapter = ConcatAdapter()
 recyclerView.addItemDecoration(ConcatItemDecoration(adapter))
 ```
+
+Go to ./app module for more information.
+
+## Contributing
+
+Thank you for being interested in contributing to this project. Check out the [CONTRIBUTING](https://github.com/carousell/ConcatAdapterExtension/blob/master/CONTRIBUTING.md) document for more info.
+
+## About
+
+<a href="https://github.com/carousell/" target="_blank"><img src="https://avatars2.githubusercontent.com/u/3833591" width="100px" alt="Carousell" align="right"/></a>
+
+**SoloAdapter** is created and maintained by [Carousell](https://carousell.com/). Help us improve this project! We'd love the [feedback](https://github.com/carousell/ConcatAdapterExtension/issues) from you.
+
+We're hiring! Find out more at <http://careers.carousell.com/>
+
+## License
+
+**SoloAdapter** is released under Apache License 2.0.
+See [LICENSE](https://github.com/carousell/ConcatAdapterExtension/blob/master/LICENSE) for more details.
