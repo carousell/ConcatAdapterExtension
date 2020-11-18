@@ -8,7 +8,7 @@ interface SpanSizeLookupOwner {
     fun getSpanSizeLookup(): GridLayoutManager.SpanSizeLookup
 }
 
-class ConcatSpanSizeLookup(private val mergeAdapter: ConcatAdapter, private val max: Int) :
+class ConcatSpanSizeLookup(private val mergeAdapter: ConcatAdapter, private val spanCount: Int) :
     GridLayoutManager.SpanSizeLookup() {
 
     private val list: List<RecyclerView.Adapter<*>>
@@ -21,13 +21,13 @@ class ConcatSpanSizeLookup(private val mergeAdapter: ConcatAdapter, private val 
                 return if (adapter is SpanSizeLookupOwner) {
                     adapter.getSpanSizeLookup().getSpanSize(index)
                 } else {
-                    max
+                    spanCount
                 }
             } else {
                 index -= adapter.itemCount
             }
         }
-        return max
+        return spanCount
 
     }
 }
