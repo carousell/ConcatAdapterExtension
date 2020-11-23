@@ -31,7 +31,7 @@ And then generate `ConcatSpanSizeLookup` by your `ConcatAdapter` and max span co
 ```kotlin
 val adapter = ConcatAdapter()
 val layoutManager = GridLayoutManager(this, spanCount, GridLayoutManager.VERTICAL, false)
-layoutManager.spanSizeLookup = ConcatSpanSizeLookup(adapter, spanCount)
+layoutManager.spanSizeLookup = ConcatSpanSizeLookup(spanCount) { adapter.adapters }
 recyclerView.layoutManager = layoutManager
 ```
 
@@ -42,7 +42,7 @@ And then generate `ConcatItemDecoration` by your `ConcatAdapter`.
 
 ```kotlin
 val adapter = ConcatAdapter()
-recyclerView.addItemDecoration(ConcatItemDecoration(adapter))
+recyclerView.addItemDecoration(ConcatItemDecoration { adapter.adapters })
 ```
 
 Go to ./app module for more information.
