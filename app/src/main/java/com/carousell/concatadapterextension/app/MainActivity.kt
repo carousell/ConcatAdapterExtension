@@ -37,7 +37,7 @@ class MainActivity : AppCompatActivity() {
             )
         )
         val layoutManager = GridLayoutManager(this, spanCount, GridLayoutManager.VERTICAL, false)
-        layoutManager.spanSizeLookup = ConcatSpanSizeLookup({ adapter.adapters }, spanCount)
+        layoutManager.spanSizeLookup = ConcatSpanSizeLookup(spanCount) { adapter.adapters }
         recyclerView.layoutManager = layoutManager
 
         recyclerView.addItemDecoration(ConcatItemDecoration { adapter.adapters })
