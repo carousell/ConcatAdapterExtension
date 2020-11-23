@@ -2,18 +2,15 @@ package com.carousell.concatadapterextension
 
 import android.graphics.Rect
 import android.view.View
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 
 interface ItemDecorationOwner {
     fun getItemDecorations(): List<RecyclerView.ItemDecoration>
 }
 
-class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
-    RecyclerView.ItemDecoration() {
-
-    private val list: List<RecyclerView.Adapter<*>>
-        get() = mergeAdapter.adapters
+class ConcatItemDecoration(
+    private val adaptersProvider: () -> List<RecyclerView.Adapter<*>>
+) : RecyclerView.ItemDecoration() {
 
     override fun getItemOffsets(
         outRect: Rect,
@@ -22,7 +19,7 @@ class ConcatItemDecoration(private val mergeAdapter: ConcatAdapter) :
         state: RecyclerView.State
     ) {
         var index = parent.getChildAdapterPosition(view)
-        list.forEach { adapter ->
+        adaptersProvider.invoke().forEach { adapter ->
             if (index < adapter.itemCount) {
                 if (adapter is ItemDecorationOwner) {
                     applyOffset(adapter.getItemDecorations(), outRect, view, parent, state)
