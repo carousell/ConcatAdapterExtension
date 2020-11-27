@@ -1,5 +1,8 @@
 # ConcatAdapterExtension
 
+[![CircleCI](https://circleci.com/gh/carousell/ConcatAdapterExtension.svg?style=shield)](https://circleci.com/gh/carousell/ConcatAdapterExtension)
+[![jitpack](https://jitpack.io/v/carousell/ConcatAdapterExtension.svg)](https://jitpack.io/#carousell/ConcatAdapterExtension)
+
 Extension for `ConcatAdapter` usage, now support `SpanSizeLookup` and `ItemDecoration` (only for spacing) feature.
 
 ## Install
