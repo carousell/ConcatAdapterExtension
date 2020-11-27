@@ -1,7 +1,6 @@
 # ConcatAdapterExtension
 
 [![CircleCI](https://circleci.com/gh/carousell/ConcatAdapterExtension.svg?style=shield)](https://circleci.com/gh/carousell/ConcatAdapterExtension)
-[![jitpack](https://jitpack.io/v/carousell/ConcatAdapterExtension.svg)](https://jitpack.io/#carousell/ConcatAdapterExtension)
 
 Extension for `ConcatAdapter` usage, now support `SpanSizeLookup` and `ItemDecoration` (only for spacing) feature.
 
@@ -20,7 +19,7 @@ allprojects {
 Then add dependency in your module `build.gradle`:
 ```groovy
 dependencies {
-  implementation 'com.github.carousell:ConcatAdapterExtension:1.0.0'
+  implementation 'com.github.carousell:ConcatAdapterExtension:1.1.0'
 }
 ```
 
@@ -47,7 +46,15 @@ And then generate `ConcatItemDecoration` by your `ConcatAdapter`.
 val adapter = ConcatAdapter()
 recyclerView.addItemDecoration(ConcatItemDecoration { adapter.adapters })
 ```
+Also please noted if you want to get the position of view inside Adapter, you should call getBindingAdapterPosition instead of getChildAdapterPosition because ConcatAdapter will be the middle layer and the position is not expected.
+```kotlin
+// This will not get the correct index.
+final int adapterPosition = parent.getChildAdapterPosition(view);
 
+// Please use this instead
+final RecyclerView.ViewHolder holder = parent.getChildViewHolder(view);
+final int adapterPosition = holder.getBindingAdapterPosition();
+```
 Go to ./app module for more information.
 
 ## Contributing
