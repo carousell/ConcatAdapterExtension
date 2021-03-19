@@ -14,7 +14,7 @@ class ConcatItemDecoration(
 ) : RecyclerView.ItemDecoration() {
 
     private fun firstItemDecoration() =
-        (adaptersProvider.invoke().firstOrNull() as ItemDecorationOwner?)
+        (adaptersProvider.invoke().firstOrNull() as? ItemDecorationOwner)
             ?.getItemDecorations()?.firstOrNull()
 
     override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
