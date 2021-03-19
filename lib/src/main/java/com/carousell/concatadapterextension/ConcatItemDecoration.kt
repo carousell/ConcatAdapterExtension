@@ -1,5 +1,6 @@
 package com.carousell.concatadapterextension
 
+import android.graphics.Canvas
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
@@ -11,6 +12,30 @@ interface ItemDecorationOwner {
 class ConcatItemDecoration(
     private val adaptersProvider: () -> List<RecyclerView.Adapter<*>>
 ) : RecyclerView.ItemDecoration() {
+
+    private fun firstItemDecoration() =
+        (adaptersProvider.invoke().firstOrNull() as ItemDecorationOwner?)
+            ?.getItemDecorations()?.firstOrNull()
+
+    override fun onDraw(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDraw(c, parent, state)
+        firstItemDecoration()?.onDraw(c, parent, state)
+    }
+
+    override fun onDraw(c: Canvas, parent: RecyclerView) {
+        super.onDraw(c, parent)
+        firstItemDecoration()?.onDraw(c, parent)
+    }
+
+    override fun onDrawOver(c: Canvas, parent: RecyclerView, state: RecyclerView.State) {
+        super.onDrawOver(c, parent, state)
+        firstItemDecoration()?.onDrawOver(c, parent, state)
+    }
+
+    override fun onDrawOver(c: Canvas, parent: RecyclerView) {
+        super.onDrawOver(c, parent)
+        firstItemDecoration()?.onDrawOver(c, parent)
+    }
 
     override fun getItemOffsets(
         outRect: Rect,
